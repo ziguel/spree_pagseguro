@@ -4,4 +4,4 @@ source 'https://rubygems.org'
 gem 'spree_auth_devise', github: 'spree/spree_auth_devise', branch: '2-1-stable'
 
 gemspec
-gem 'pag_seguro', github: 'heavenstudio/pag_seguro', branch: 'master'
+gem 'pag_seguro', github: 'marcosteixeira/pag_seguro', branch: 'sandbox'

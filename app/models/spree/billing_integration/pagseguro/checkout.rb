@@ -2,6 +2,7 @@ module Spree
   class BillingIntegration::Pagseguro::Checkout < BillingIntegration
     preference :email, :string
     preference :token, :string
+    preference :server, :string, default: 'sandbox'
 
     def provider_class
       ActiveMerchant::Billing::Pagseguro
@@ -29,6 +30,7 @@ module Spree
 
       options[:email] = (Rails.env.test?) ? ENV['SPREE_PAGSEGURO_EMAIL'] : preferences[:email]
       options[:token] = (Rails.env.test?) ? ENV['SPREE_PAGSEGURO_TOKEN'] : preferences[:token]
+      options[:server] = (Rails.env.test?) ? 'production' : preferences[:server]
 
       pagseguro = self.provider.payment_url(options)
 

@@ -14,3 +14,5 @@ pkg
 spec/dummy
 .bundle
 bin
+.ruby-version
+.ruby-gemset
