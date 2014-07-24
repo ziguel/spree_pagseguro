@@ -30,7 +30,6 @@ module Spree
 
       options[:email] = (Rails.env.test?) ? ENV['SPREE_PAGSEGURO_EMAIL'] : preferences[:email]
       options[:token] = (Rails.env.test?) ? ENV['SPREE_PAGSEGURO_TOKEN'] : preferences[:token]
-      options[:server] = (Rails.env.test?) ? 'production' : preferences[:server]
 
       pagseguro = self.provider.payment_url(options)
 

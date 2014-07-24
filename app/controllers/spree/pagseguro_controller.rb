@@ -19,15 +19,16 @@ module Spree
       payment_method = Spree::PaymentMethod.where(type: 'Spree::BillingIntegration::Pagseguro::Checkout').first
 
       @order = Spree::Order.find_by_number(notification.reference)
-      payment = @order.payments.where(:state => "checkout",
-                                      :payment_method_id => payment_method.id).last
+      payment = @order.payments.where(:payment_method_id => payment_method.id).last
 
+      payment.started_processing!
       if notification.approved?
         logger.info "[PAGSEGURO] Order #{@order.number} approved"
         payment.complete!
+        @order.next
       else
         logger.info "[PAGSEGURO] Order #{@order.number} failed"
-        payment.failure!
+        payment.pend!
       end
 
       render nothing: true, head: :ok
